@@ -1,0 +1,109 @@
+<html>
+<head>
+<title>Leave.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Leave.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">org</span><span class="s2">.</span><span class="s1">example</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">openqa</span><span class="s2">.</span><span class="s1">selenium</span><span class="s2">.</span><span class="s1">By</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">openqa</span><span class="s2">.</span><span class="s1">selenium</span><span class="s2">.</span><span class="s1">WebDriver</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">openqa</span><span class="s2">.</span><span class="s1">selenium</span><span class="s2">.</span><span class="s1">WebElement</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">openqa</span><span class="s2">.</span><span class="s1">selenium</span><span class="s2">.</span><span class="s1">edge</span><span class="s2">.</span><span class="s1">EdgeDriver</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">testng</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">AfterMethod</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">testng</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">BeforeMethod</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">testng</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">Test</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">time</span><span class="s2">.</span><span class="s1">Duration</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">Leave </span><span class="s2">{</span>
+    <span class="s1">WebDriver driver</span><span class="s2">;</span>
+
+    <span class="s1">@BeforeMethod</span>
+    <span class="s0">public void </span><span class="s1">setUp</span><span class="s2">() {</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">setProperty</span><span class="s2">(</span><span class="s3">&quot;webDriver.edge.driver&quot;</span><span class="s2">, </span><span class="s3">&quot;C:/WebDrivers/msedgedriver.exe&quot;</span><span class="s2">);</span>
+        <span class="s1">driver </span><span class="s2">= </span><span class="s0">new </span><span class="s1">EdgeDriver</span><span class="s2">();</span>
+        <span class="s1">driver</span><span class="s2">.</span><span class="s1">manage</span><span class="s2">().</span><span class="s1">window</span><span class="s2">().</span><span class="s1">maximize</span><span class="s2">();</span>
+        <span class="s1">driver</span><span class="s2">.</span><span class="s1">manage</span><span class="s2">().</span><span class="s1">timeouts</span><span class="s2">().</span><span class="s1">implicitlyWait</span><span class="s2">(</span><span class="s1">Duration</span><span class="s2">.</span><span class="s1">ofSeconds</span><span class="s2">(</span><span class="s4">10</span><span class="s2">));</span>
+
+        <span class="s5">// Navigate to OrangeHRM demo login page</span>
+        <span class="s1">driver</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">&quot;https://opensource-demo.orangehrmlive.com/web/index.php/auth/login&quot;</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Test</span>
+    <span class="s0">public void </span><span class="s1">testAddLeaveEntitlement</span><span class="s2">() </span><span class="s0">throws </span><span class="s1">InterruptedException </span><span class="s2">{</span>
+        <span class="s5">// 1. Log in</span>
+        <span class="s1">WebElement username </span><span class="s2">= </span><span class="s1">driver</span><span class="s2">.</span><span class="s1">findElement</span><span class="s2">(</span><span class="s1">By</span><span class="s2">.</span><span class="s1">name</span><span class="s2">(</span><span class="s3">&quot;username&quot;</span><span class="s2">));</span>
+        <span class="s1">WebElement password </span><span class="s2">= </span><span class="s1">driver</span><span class="s2">.</span><span class="s1">findElement</span><span class="s2">(</span><span class="s1">By</span><span class="s2">.</span><span class="s1">name</span><span class="s2">(</span><span class="s3">&quot;password&quot;</span><span class="s2">));</span>
+        <span class="s1">WebElement loginButton </span><span class="s2">= </span><span class="s1">driver</span><span class="s2">.</span><span class="s1">findElement</span><span class="s2">(</span><span class="s1">By</span><span class="s2">.</span><span class="s1">cssSelector</span><span class="s2">(</span><span class="s3">&quot;button[type='submit']&quot;</span><span class="s2">));</span>
+
+        <span class="s1">username</span><span class="s2">.</span><span class="s1">sendKeys</span><span class="s2">(</span><span class="s3">&quot;Admin&quot;</span><span class="s2">);</span>
+        <span class="s1">password</span><span class="s2">.</span><span class="s1">sendKeys</span><span class="s2">(</span><span class="s3">&quot;admin123&quot;</span><span class="s2">);</span>
+        <span class="s1">loginButton</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+
+        <span class="s5">// Wait for the page to load after login</span>
+        <span class="s1">Thread</span><span class="s2">.</span><span class="s1">sleep</span><span class="s2">(</span><span class="s4">2000</span><span class="s2">);  </span><span class="s5">// You can replace this with an explicit wait if needed.</span>
+
+        <span class="s5">// 2. Navigate to the Leave Entitlement page</span>
+        <span class="s1">WebElement leaveMenu </span><span class="s2">= </span><span class="s1">driver</span><span class="s2">.</span><span class="s1">findElement</span><span class="s2">(</span><span class="s1">By</span><span class="s2">.</span><span class="s1">xpath</span><span class="s2">(</span><span class="s3">&quot;//span[text()='Leave']&quot;</span><span class="s2">));</span>
+        <span class="s1">leaveMenu</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+
+        <span class="s1">Thread</span><span class="s2">.</span><span class="s1">sleep</span><span class="s2">(</span><span class="s4">2000</span><span class="s2">); </span><span class="s5">// Wait for the menu to expand</span>
+
+        <span class="s1">WebElement entitlementsMenu </span><span class="s2">= </span><span class="s1">driver</span><span class="s2">.</span><span class="s1">findElement</span><span class="s2">(</span><span class="s1">By</span><span class="s2">.</span><span class="s1">xpath</span><span class="s2">(</span><span class="s3">&quot;//a[contains(@href, '/leave/addLeaveEntitlement')]&quot;</span><span class="s2">));</span>
+        <span class="s1">entitlementsMenu</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+
+        <span class="s5">// 3. Fill in the form</span>
+        <span class="s1">Thread</span><span class="s2">.</span><span class="s1">sleep</span><span class="s2">(</span><span class="s4">2000</span><span class="s2">);  </span><span class="s5">// Wait for the entitlement page to load</span>
+
+        <span class="s5">// Select Employee</span>
+        <span class="s1">WebElement employeeNameField </span><span class="s2">= </span><span class="s1">driver</span><span class="s2">.</span><span class="s1">findElement</span><span class="s2">(</span><span class="s1">By</span><span class="s2">.</span><span class="s1">xpath</span><span class="s2">(</span><span class="s3">&quot;//input[@placeholder='Type for hints...']&quot;</span><span class="s2">));</span>
+        <span class="s1">employeeNameField</span><span class="s2">.</span><span class="s1">sendKeys</span><span class="s2">(</span><span class="s3">&quot;Linda Anderson&quot;</span><span class="s2">);</span>
+        <span class="s1">Thread</span><span class="s2">.</span><span class="s1">sleep</span><span class="s2">(</span><span class="s4">2000</span><span class="s2">);  </span><span class="s5">// Wait for the auto-suggest list</span>
+
+        <span class="s1">WebElement employeeOption </span><span class="s2">= </span><span class="s1">driver</span><span class="s2">.</span><span class="s1">findElement</span><span class="s2">(</span><span class="s1">By</span><span class="s2">.</span><span class="s1">xpath</span><span class="s2">(</span><span class="s3">&quot;//div[@role='option']//span[text()='Linda Anderson']&quot;</span><span class="s2">));</span>
+        <span class="s1">employeeOption</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+
+        <span class="s5">// Select Leave Type</span>
+        <span class="s1">WebElement leaveTypeDropdown </span><span class="s2">= </span><span class="s1">driver</span><span class="s2">.</span><span class="s1">findElement</span><span class="s2">(</span><span class="s1">By</span><span class="s2">.</span><span class="s1">xpath</span><span class="s2">(</span><span class="s3">&quot;//div[contains(@class, 'oxd-select-text')]&quot;</span><span class="s2">));</span>
+        <span class="s1">leaveTypeDropdown</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+
+        <span class="s1">WebElement leaveTypeOption </span><span class="s2">= </span><span class="s1">driver</span><span class="s2">.</span><span class="s1">findElement</span><span class="s2">(</span><span class="s1">By</span><span class="s2">.</span><span class="s1">xpath</span><span class="s2">(</span><span class="s3">&quot;//span[text()='CAN - Bereavement']&quot;</span><span class="s2">));</span>
+        <span class="s1">leaveTypeOption</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+
+        <span class="s5">// Enter Entitlement</span>
+        <span class="s1">WebElement entitlementField </span><span class="s2">= </span><span class="s1">driver</span><span class="s2">.</span><span class="s1">findElement</span><span class="s2">(</span><span class="s1">By</span><span class="s2">.</span><span class="s1">xpath</span><span class="s2">(</span><span class="s3">&quot;//input[@name='entitlement[entitlement]']&quot;</span><span class="s2">));</span>
+        <span class="s1">entitlementField</span><span class="s2">.</span><span class="s1">sendKeys</span><span class="s2">(</span><span class="s3">&quot;10&quot;</span><span class="s2">);</span>
+
+        <span class="s5">// 4. Submit the form</span>
+        <span class="s1">WebElement saveButton </span><span class="s2">= </span><span class="s1">driver</span><span class="s2">.</span><span class="s1">findElement</span><span class="s2">(</span><span class="s1">By</span><span class="s2">.</span><span class="s1">xpath</span><span class="s2">(</span><span class="s3">&quot;//button[@type='submit']&quot;</span><span class="s2">));</span>
+        <span class="s1">saveButton</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+
+        <span class="s5">// 5. Verify success message or other indications</span>
+        <span class="s1">Thread</span><span class="s2">.</span><span class="s1">sleep</span><span class="s2">(</span><span class="s4">2000</span><span class="s2">);  </span><span class="s5">// Wait for the page to process the submission</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@AfterMethod</span>
+    <span class="s0">public void </span><span class="s1">tearDown</span><span class="s2">() {</span>
+        <span class="s5">// Close the browser</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">driver </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s1">driver</span><span class="s2">.</span><span class="s1">quit</span><span class="s2">();</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>
